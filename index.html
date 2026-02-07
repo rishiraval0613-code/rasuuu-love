@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For Rasuuu ❤️</title>
+<style>
+body{font-family:Arial;background:linear-gradient(#ffb6c1,#ffc0cb);text-align:center}
+.page{display:none;padding:30px}
+.active{display:block}
+button{padding:12px 22px;border:none;border-radius:20px;background:#ff4d88;color:white;margin:8px}
+#noBtn{position:absolute}
+</style>
+</head>
+<body>
+
+<audio autoplay loop>
+<source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div id="page1" class="page active">
+<h1>💖 Happy Propose Day 💖</h1>
+<h2>For My Love: Rasuuu ❤️</h2>
+<h3>Do You Accept My Proposal? 💍</h3>
+<button onclick="go(2)">Yes 😍</button>
+<button id="noBtn" onclick="move()">No 🙈</button>
+</div>
+
+<div id="page2" class="page">
+<h1>I Love You 💝</h1>
+<button onclick="go(3)">Gift 1 💌</button>
+<button onclick="go(4)">Gift 2 📸</button>
+<button onclick="go(5)">Gift 3 ❤️</button>
+</div>
+
+<div id="page3" class="page">
+<h2>Do You Love Me? 😘</h2>
+<button onclick="alert('I Love You Too 😍')">Yes ❤️</button>
+<button onclick="alert('Try Again 😝 Answer is YES ❤️')">No 🙈</button>
+</div>
+
+<div id="page4" class="page">
+<h2>My Favorite Memories 📸</h2>
+<img src="photo1.jpg" width="250"><br><br>
+<button onclick="go(2)">Back</button>
+</div>
+
+<div id="page5" class="page">
+<h2>❤️ I Love You Forever ❤️</h2>
+<img src="photo2.jpg" width="250"><br><br>
+<button onclick="share()">Share 💌</button>
+</div>
+
+<script>
+function go(n){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById('page'+n).classList.add('active');
+}
+function move(){
+let b=document.getElementById('noBtn');
+b.style.left=Math.random()*(window.innerWidth-100)+'px';
+b.style.top=Math.random()*(window.innerHeight-100)+'px';
+}
+function share(){
+if(navigator.share){
+navigator.share({title:"For Rasuuu ❤️",text:"I made this for you 💖",url:location.href});
+}else{alert("Copy link & share 💌");}
+}
+</script>
+
+</body>
+</html>
