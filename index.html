@@ -1,71 +1,185 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>For Rasuuu ❤️</title>
+
 <style>
-body{font-family:Arial;background:linear-gradient(#ffb6c1,#ffc0cb);text-align:center}
-.page{display:none;padding:30px}
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(#ff9ecb,#ffcce0);
+text-align:center;
+overflow:hidden;
+}
+
+/* Floating hearts */
+.heart{
+position:fixed;
+color:red;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{bottom:-20px;opacity:1}
+100%{bottom:100%;opacity:0}
+}
+
+.page{display:none;padding:25px}
 .active{display:block}
-button{padding:12px 22px;border:none;border-radius:20px;background:#ff4d88;color:white;margin:8px}
+
+h1,h2{color:#c2185b}
+
+button{
+padding:12px 22px;
+border:none;
+border-radius:25px;
+background:#ff4081;
+color:white;
+font-size:16px;
+margin:8px;
+}
+
+button:hover{
+background:#e91e63;
+}
+
 #noBtn{position:absolute}
+
+.frame{
+background:white;
+padding:12px;
+border-radius:20px;
+width:260px;
+margin:auto;
+box-shadow:0 0 20px pink;
+}
+
+.frame img{
+width:100%;
+border-radius:15px;
+}
+
+.gif{
+width:120px;
+border-radius:15px;
+}
+
 </style>
 </head>
+
 <body>
 
 <audio autoplay loop>
-<source src="song.mp3" type="audio/mpeg">
+<source src="song.mp3">
 </audio>
 
-<div id="page1" class="page active">
-<h1>💖 Happy Propose Day 💖</h1>
-<h2>For My Love: Rasuuu ❤️</h2>
-<h3>Do You Accept My Proposal? 💍</h3>
+<!-- PAGE 1 -->
+<div id="p1" class="page active">
+
+<img class="gif" src="https://media.tenor.com/7E8F9xCk3kwAAAAC/love-cute.gif">
+
+<h1>Happy Propose Day 💖</h1>
+<h2>Rasuuu ❤️</h2>
+
+<h3>Will You Be Mine? 💍</h3>
+
 <button onclick="go(2)">Yes 😍</button>
 <button id="noBtn" onclick="move()">No 🙈</button>
+
 </div>
 
-<div id="page2" class="page">
-<h1>I Love You 💝</h1>
+<!-- PAGE 2 -->
+<div id="p2" class="page">
+
+<img class="gif" src="https://media.tenor.com/jnINmQlMNbsAAAAC/cute-love.gif">
+
+<h1>I Love You So Much 💝</h1>
+
 <button onclick="go(3)">Gift 1 💌</button>
 <button onclick="go(4)">Gift 2 📸</button>
 <button onclick="go(5)">Gift 3 ❤️</button>
+
 </div>
 
-<div id="page3" class="page">
+<!-- GIFT 1 -->
+<div id="p3" class="page">
+
+<img class="gif" src="https://media.tenor.com/Byc8s5r9B_cAAAAC/kiss-love.gif">
+
 <h2>Do You Love Me? 😘</h2>
-<button onclick="alert('I Love You Too 😍')">Yes ❤️</button>
-<button onclick="alert('Try Again 😝 Answer is YES ❤️')">No 🙈</button>
+
+<button onclick="alert('I Love You Too 😍💖')">Yes ❤️</button>
+<button onclick="alert('Wrong Answer 😝 Try YES ❤️')">No 🙈</button>
+
 </div>
 
-<div id="page4" class="page">
-<h2>My Favorite Memories 📸</h2>
-<img src="photo1.jpg" width="250"><br><br>
-<button onclick="go(2)">Back</button>
+<!-- GIFT 2 -->
+<div id="p4" class="page">
+
+<h2>Our Memories 📸💞</h2>
+
+<div class="frame">
+<img src="photo1.jpg">
 </div>
 
-<div id="page5" class="page">
-<h2>❤️ I Love You Forever ❤️</h2>
-<img src="photo2.jpg" width="250"><br><br>
+<p>You Are My Heart 💖🥺</p>
+
+<button onclick="go(2)">Back 💗</button>
+
+</div>
+
+<!-- GIFT 3 -->
+<div id="p5" class="page">
+
+<h1>❤️ Forever Us ❤️</h1>
+
+<img class="gif" src="https://media.tenor.com/Z8ezUHZzcLoAAAAC/love-heart.gif">
+
+<div class="frame">
+<img src="photo2.jpg">
+</div>
+
+<h2>I Love You Always 💞</h2>
+
 <button onclick="share()">Share 💌</button>
+
 </div>
 
 <script>
+
 function go(n){
 document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-document.getElementById('page'+n).classList.add('active');
+document.getElementById('p'+n).classList.add('active');
 }
+
 function move(){
-let b=document.getElementById('noBtn');
-b.style.left=Math.random()*(window.innerWidth-100)+'px';
-b.style.top=Math.random()*(window.innerHeight-100)+'px';
+let b=document.getElementById("noBtn");
+b.style.left=Math.random()*(window.innerWidth-100)+"px";
+b.style.top=Math.random()*(window.innerHeight-100)+"px";
 }
+
+/* Hearts */
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"%";
+h.style.fontSize=(15+Math.random()*25)+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+},400);
+
 function share(){
-if(navigator.share){
-navigator.share({title:"For Rasuuu ❤️",text:"I made this for you 💖",url:location.href});
-}else{alert("Copy link & share 💌");}
+navigator.share({
+title:"For Rasuuu ❤️",
+text:"I made this for you 💖",
+url:location.href
+});
 }
+
 </script>
 
 </body>
