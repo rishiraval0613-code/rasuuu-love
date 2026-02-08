@@ -8,9 +8,8 @@
 
 <style>
 
-html,body{
+body{
   margin:0;
-  padding:0;
   background:black;
   color:gold;
   font-family:cursive;
@@ -30,15 +29,15 @@ canvas{
 }
 
 /* Layers */
-#text,#hint,#photos,#popup{
+#text,#hint,#gallery,#popup{
   position:relative;
   z-index:5;
 }
 
-/* Text */
+/* Intro */
 #text{
-  margin-top:100px;
-  font-size:30px;
+  margin-top:120px;
+  font-size:32px;
   text-shadow:0 0 15px gold;
 }
 
@@ -47,28 +46,29 @@ canvas{
   color:white;
 }
 
-/* Photos */
-#photos{
+/* Gallery */
+#gallery{
   display:none;
   margin-top:40px;
-  padding-bottom:60px;
+  padding-bottom:80px;
 }
 
-/* Flip Cards */
+/* Cards */
 
 .card{
-  width:260px;
-  height:360px;
+  width:90%;
+  max-width:350px;
+  height:420px;
+  margin:30px auto;
   perspective:1000px;
-  margin:22px auto;
 }
 
 .inner{
   width:100%;
   height:100%;
-  position:relative;
+  transition:transform 0.8s;
   transform-style:preserve-3d;
-  transition:0.7s;
+  position:relative;
 }
 
 .card.flip .inner{
@@ -76,50 +76,56 @@ canvas{
 }
 
 .front,.back{
-  position:absolute;
   width:100%;
   height:100%;
-  border-radius:20px;
+  position:absolute;
   backface-visibility:hidden;
-  overflow:hidden;
-  box-shadow:0 0 20px gold;
+  border-radius:20px;
+  box-shadow:0 0 15px gold;
 }
 
-/* Front */
 .front{
   background:#111;
   display:flex;
-  align-items:center;
   justify-content:center;
-  font-size:22px;
+  align-items:center;
+  font-size:26px;
 }
 
-/* Back */
 .back{
   transform:rotateY(180deg);
+  background:black;
 }
 
 .back img{
   width:100%;
-  height:100%;
+  height:75%;
   object-fit:cover;
+  border-radius:20px 20px 0 0;
+}
+
+.caption{
+  padding:8px;
+  font-size:15px;
 }
 
 /* Hearts */
+
 .heart{
   position:fixed;
   color:pink;
-  font-size:22px;
-  animation:float 3s linear forwards;
+  font-size:20px;
+  animation:float 4s linear forwards;
   z-index:3;
 }
 
 @keyframes float{
   from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-500px);opacity:0;}
+  to{transform:translateY(-600px);opacity:0;}
 }
 
 /* Popup */
+
 #popup{
   display:none;
   position:fixed;
@@ -130,7 +136,7 @@ canvas{
   border:2px solid gold;
   padding:25px;
   border-radius:15px;
-  box-shadow:0 0 20px gold;
+  box-shadow:0 0 25px gold;
   width:80%;
   max-width:300px;
 }
@@ -141,17 +147,10 @@ canvas{
   border:none;
   border-radius:20px;
   font-size:16px;
-  cursor:pointer;
 }
 
-#yes{
-  background:pink;
-}
-
-#no{
-  background:gray;
-  color:white;
-}
+#yes{background:pink;}
+#no{background:gray;color:white;}
 
 </style>
 </head>
@@ -160,43 +159,92 @@ canvas{
 
 <canvas id="c"></canvas>
 
-<div id="text">Tap to start 💖</div>
+<div id="text">Tap to Start 💖</div>
 <div id="hint">Tap for magic ✨</div>
 
-<div id="photos">
+
+<!-- Gallery -->
+
+<div id="gallery">
 
 <h2>I Love You Rasuu ❤️</h2>
 
-<div class="card"><div class="inner">
-<div class="front">Tap 💕</div>
-<div class="back"><img src="photo1.jpg"></div>
-</div></div>
 
-<div class="card"><div class="inner">
-<div class="front">Tap 💕</div>
-<div class="back"><img src="photo2.jpg"></div>
-</div></div>
+<!-- CARD 1 -->
+<div class="card">
+<div class="inner">
 
-<div class="card"><div class="inner">
 <div class="front">Tap 💕</div>
-<div class="back"><img src="photo3.jpg"></div>
-</div></div>
 
-<div class="card"><div class="inner">
-<div class="front">Tap 💕</div>
-<div class="back"><img src="photo4.jpg"></div>
-</div></div>
+<div class="back">
+<img src="photo1.jpg">
+<div class="caption">My favorite smile 😍</div>
+</div>
 
-<div class="card"><div class="inner">
-<div class="front">Tap 💕</div>
-<div class="back"><img src="photo5.jpg"></div>
-</div></div>
+</div>
+</div>
 
-<h3>You Complete Me 💕</h3>
+<!-- CARD 2 -->
+<div class="card">
+<div class="inner">
+
+<div class="front">Tap 💖</div>
+
+<div class="back">
+<img src="photo2.jpg">
+<div class="caption">You make my world bright ✨</div>
+</div>
+
+</div>
+</div>
+
+<!-- CARD 3 -->
+<div class="card">
+<div class="inner">
+
+<div class="front">Tap ❤️</div>
+
+<div class="back">
+<img src="photo3.jpg">
+<div class="caption">Every moment with you is magic 💫</div>
+</div>
+
+</div>
+</div>
+
+<!-- CARD 4 -->
+<div class="card">
+<div class="inner">
+
+<div class="front">Tap 😘</div>
+
+<div class="back">
+<img src="photo4.jpg">
+<div class="caption">My happiness begins with you 💕</div>
+</div>
+
+</div>
+</div>
+
+<!-- CARD 5 -->
+<div class="card">
+<div class="inner">
+
+<div class="front">Tap 💍</div>
+
+<div class="back">
+<img src="photo5.jpg">
+<div class="caption">Forever starts with us ❤️</div>
+</div>
+
+</div>
+</div>
 
 </div>
 
+
 <!-- Popup -->
+
 <div id="popup">
 
 <h3>Will You Be Mine? 💍❤️</h3>
@@ -205,6 +253,7 @@ canvas{
 <button id="no">No 🙈</button>
 
 </div>
+
 
 <script>
 
@@ -220,6 +269,7 @@ function resize(){
 resize();
 addEventListener("resize",resize);
 
+
 /* Fireworks */
 
 let fireworks=[];
@@ -229,18 +279,18 @@ function Fire(x,y){
   this.y=y;
   this.dx=(Math.random()-0.5)*5;
   this.dy=(Math.random()-0.5)*5;
-  this.life=45;
+  this.life=40;
 }
 
-function boom(x,y,count=20){
-  for(let i=0;i<count;i++){
+function boom(x,y){
+  for(let i=0;i<30;i++){
     fireworks.push(new Fire(x,y));
   }
 }
 
 function draw(){
 
-  ctx.fillStyle="rgba(0,0,0,0.4)";
+  ctx.fillStyle="rgba(0,0,0,0.3)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   fireworks.forEach((f,i)=>{
@@ -254,7 +304,7 @@ function draw(){
     f.y+=f.dy;
     f.life--;
 
-    if(f.life<0) fireworks.splice(i,1);
+    if(f.life<0)fireworks.splice(i,1);
 
   });
 
@@ -262,10 +312,10 @@ function draw(){
 }
 draw();
 
+
 /* Hearts */
 
-function createHeart(){
-
+function heart(){
   const h=document.createElement("div");
   h.className="heart";
   h.innerHTML="💖";
@@ -275,109 +325,90 @@ function createHeart(){
 
   document.body.appendChild(h);
 
-  setTimeout(()=>h.remove(),3000);
+  setTimeout(()=>h.remove(),4000);
 }
 
-/* Main Logic */
+
+/* Intro */
 
 let taps=0;
-let photosOpened=false;
 
 document.body.addEventListener("touchstart",(e)=>{
 
   const t=e.touches[0];
-
   boom(t.clientX,t.clientY);
-  createHeart();
+  heart();
 
   taps++;
 
-  /* FAST TEXT FLOW */
+  if(taps==1)text.innerText="I Love You 💛";
+  if(taps==3)text.innerText="Forever With You 💕";
+  if(taps==5)text.innerText="Only You ❤️";
 
-  if(taps==1) text.innerText="I Love You 💛";
-  if(taps==2) text.innerText="Forever With You 💕";
-  if(taps==3) text.innerText="Only You ❤️";
-  if(taps==4) text.innerText="My Everything 💖";
+  if(taps==6){
 
-  /* OPEN PHOTOS QUICK */
-
-  if(taps==5 && !photosOpened){
-
-    photosOpened=true;
-
-    text.innerText="For You Rasuu 🌍❤️";
-
-    photos.style.display="block";
+    text.innerText="Scroll Down 💖";
+    gallery.style.display="block";
 
     setTimeout(()=>{
-      window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
-      });
-    },400);
+      scrollTo({top:400,behavior:"smooth"});
+    },300);
   }
 
 });
 
-/* Flip Cards */
+
+/* Cards */
+
+let flipped=0;
 
 document.querySelectorAll(".card").forEach(card=>{
 
   card.addEventListener("click",(e)=>{
 
+    if(!card.classList.contains("flip")){
+      flipped++;
+    }
+
     card.classList.toggle("flip");
 
     boom(e.clientX,e.clientY);
-    createHeart();
+    heart();
+
+    if(flipped==5){
+
+      setTimeout(()=>{
+
+        scrollTo({
+          top:document.body.scrollHeight,
+          behavior:"smooth"
+        });
+
+        setTimeout(()=>{
+          popup.style.display="block";
+        },1000);
+
+      },800);
+
+    }
 
   });
 
 });
 
-/* Show Proposal After Scroll End */
 
-window.addEventListener("scroll",()=>{
-
-  if(photosOpened){
-
-    if(window.innerHeight + window.scrollY >= document.body.offsetHeight-50){
-
-      setTimeout(()=>{
-        popup.style.display="block";
-      },800);
-
-    }
-  }
-
-});
-
-/* YES = CRAZY BLAST */
+/* Buttons */
 
 yes.onclick=()=>{
 
-  popup.innerHTML="<h2>I Love You 😍❤️</h2>";
+  popup.innerHTML="<h2>Yaaayyy 😍❤️</h2><p>I Love You Forever 💖</p>";
 
-  let i=0;
-
-  const blast=setInterval(()=>{
-
-    boom(
-      Math.random()*innerWidth,
-      Math.random()*innerHeight,
-      40
-    );
-
-    createHeart();
-
-    i++;
-
-    if(i>15) clearInterval(blast);
-
-  },150);
+  setInterval(()=>{
+    boom(Math.random()*innerWidth,Math.random()*innerHeight);
+    heart();
+  },200);
 
 };
-
-/* NO Button Run 😅 */
 
 no.onclick=()=>{
 
