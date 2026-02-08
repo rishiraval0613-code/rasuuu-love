@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For Rasuu ❤️</title>
+<title>For My Rasuu ❤️</title>
 
 <style>
 
-body,html{
+html,body{
   margin:0;
   padding:0;
   background:black;
+  color:gold;
   font-family:cursive;
   text-align:center;
-  color:gold;
   overflow-x:hidden;
 }
 
@@ -29,31 +29,38 @@ canvas{
   z-index:0;
 }
 
-/* Main Text */
+/* Layers */
+#text,#hint,#photos,#popup{
+  position:relative;
+  z-index:5;
+}
+
+/* Text */
 #text{
-  margin:80px 0 20px;
-  font-size:30px;
+  margin-top:120px;
+  font-size:32px;
   text-shadow:0 0 15px gold;
-  position:relative;
-  z-index:5;
 }
 
-/* Gallery */
-.gallery{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:30px;
-  padding-bottom:80px;
-  position:relative;
-  z-index:5;
+#hint{
+  font-size:14px;
+  color:white;
 }
 
-/* Flip Card */
+/* Photos */
+#photos{
+  display:none;
+  margin-top:50px;
+  padding-bottom:60px;
+}
+
+/* Flip Cards */
+
 .card{
   width:280px;
   height:380px;
   perspective:1000px;
+  margin:25px auto;
 }
 
 .inner{
@@ -82,8 +89,8 @@ canvas{
 .front{
   background:#111;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   font-size:22px;
 }
 
@@ -98,18 +105,53 @@ canvas{
   object-fit:cover;
 }
 
-/* Hearts */
+
+/* Floating Hearts */
 .heart{
   position:fixed;
-  font-size:22px;
-  animation:float 4s linear forwards;
   color:pink;
-  z-index:2;
+  font-size:20px;
+  animation:float 4s linear forwards;
+  z-index:3;
 }
 
 @keyframes float{
-  from{transform:translateY(0);opacity:1;}
-  to{transform:translateY(-600px);opacity:0;}
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-600px);opacity:0;}
+}
+
+/* Popup */
+#popup{
+  display:none;
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  background:#111;
+  border:2px solid gold;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 0 20px gold;
+  width:80%;
+  max-width:300px;
+}
+
+#popup button{
+  margin:10px;
+  padding:8px 20px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+#yes{
+  background:pink;
+}
+
+#no{
+  background:gray;
+  color:white;
 }
 
 </style>
@@ -119,44 +161,61 @@ canvas{
 
 <canvas id="c"></canvas>
 
-<div id="text">Tap Photos 💖</div>
+<div id="text">Tap to start 💖</div>
+<div id="hint">Tap for magic ✨</div>
 
-<div class="gallery">
+<div id="photos">
 
-  <div class="card">
-    <div class="inner">
-      <div class="front">Tap To See 💕</div>
-      <div class="back"><img src="photo1.jpg"></div>
-    </div>
+<h2>I Love You Rasuu ❤️</h2>
+
+<!-- Flip Photos -->
+
+<div class="card">
+  <div class="inner">
+    <div class="front">Tap To See 💕</div>
+    <div class="back"><img src="photo1.jpg"></div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="inner">
-      <div class="front">Tap To See 💕</div>
-      <div class="back"><img src="photo2.jpg"></div>
-    </div>
+<div class="card">
+  <div class="inner">
+    <div class="front">Tap To See 💕</div>
+    <div class="back"><img src="photo2.jpg"></div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="inner">
-      <div class="front">Tap To See 💕</div>
-      <div class="back"><img src="photo3.jpg"></div>
-    </div>
+<div class="card">
+  <div class="inner">
+    <div class="front">Tap To See 💕</div>
+    <div class="back"><img src="photo3.jpg"></div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="inner">
-      <div class="front">Tap To See 💕</div>
-      <div class="back"><img src="photo4.jpg"></div>
-    </div>
+<div class="card">
+  <div class="inner">
+    <div class="front">Tap To See 💕</div>
+    <div class="back"><img src="photo4.jpg"></div>
   </div>
+</div>
 
-  <div class="card">
-    <div class="inner">
-      <div class="front">Tap To See 💕</div>
-      <div class="back"><img src="photo5.jpg"></div>
-    </div>
+<div class="card">
+  <div class="inner">
+    <div class="front">Tap To See 💕</div>
+    <div class="back"><img src="photo5.jpg"></div>
   </div>
+</div>
+
+<h3>You Complete Me 💕</h3>
+
+</div>
+
+<!-- Popup -->
+<div id="popup">
+
+<h3>Will You Be Mine? 💍❤️</h3>
+
+<button id="yes">Yes 💖</button>
+<button id="no">No 🙈</button>
 
 </div>
 
@@ -164,8 +223,8 @@ canvas{
 
 /* Canvas */
 
-const canvas=document.getElementById("c");
-const ctx=canvas.getContext("2d");
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
 
 function resize(){
   canvas.width=innerWidth;
@@ -173,6 +232,8 @@ function resize(){
 }
 resize();
 addEventListener("resize",resize);
+
+/* Fireworks */
 
 let fireworks=[];
 
@@ -185,14 +246,14 @@ function Fire(x,y){
 }
 
 function boom(x,y){
-  for(let i=0;i<20;i++){
+  for(let i=0;i<25;i++){
     fireworks.push(new Fire(x,y));
   }
 }
 
 function draw(){
 
-  ctx.fillStyle="rgba(0,0,0,0.3)";
+  ctx.fillStyle="rgba(0,0,0,0.35)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   fireworks.forEach((f,i)=>{
@@ -219,20 +280,59 @@ draw();
 
 /* Hearts */
 
-function heart(){
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
+function createHeart(){
 
-  h.style.left=Math.random()*100+"vw";
-  h.style.bottom="0";
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
 
-  document.body.appendChild(h);
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.bottom="0px";
 
-  setTimeout(()=>h.remove(),4000);
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),4000);
 }
 
-/* Flip Logic */
+/* Main Logic */
+
+let taps=0;
+
+document.body.addEventListener("touchstart",(e)=>{
+
+  const t=e.touches[0];
+
+  boom(t.clientX,t.clientY);
+  createHeart();
+
+  taps++;
+
+  if(taps==1) text.innerText="I Love You 💛";
+  if(taps==4) text.innerText="Forever With You 💕";
+  if(taps==7) text.innerText="Only You Rasuu ❤️";
+  if(taps==10) text.innerText="My Everything 💖";
+
+  if(taps==12){
+
+    text.innerText="You Are My World 🌍❤️";
+
+    photos.style.display="block";
+
+    setTimeout(()=>{
+      window.scrollTo({
+        top:document.body.scrollHeight,
+        behavior:"smooth"
+      });
+    },500);
+
+    setTimeout(()=>{
+      popup.style.display="block";
+    },2500);
+  }
+
+});
+
+/* Flip Cards */
 
 document.querySelectorAll(".card").forEach(card=>{
 
@@ -241,11 +341,23 @@ document.querySelectorAll(".card").forEach(card=>{
     card.classList.toggle("flip");
 
     boom(e.clientX,e.clientY);
-    heart();
+    createHeart();
 
   });
 
 });
+
+/* Popup */
+
+yes.onclick=()=>{
+  popup.innerHTML="<h2>Yaaayyy 😍❤️</h2><p>I Love You Forever 💖</p>";
+};
+
+no.onclick=()=>{
+  no.style.position="absolute";
+  no.style.left=Math.random()*200+"px";
+  no.style.top=Math.random()*150+"px";
+};
 
 </script>
 
