@@ -130,14 +130,15 @@ document.getElementById("text").innerText="";
 }
 
 if(taps==12){
-document.getElementById("photos").style.display="block";
+ document.getElementById("photos").style.display="block";
+
+ window.scrollTo({
+   top: document.body.scrollHeight,
+   behavior: "smooth"
+ });
 }
 });
 </script>
 
 </body>
 </html>
-if(taps==12){
- document.getElementById("photos").style.display="block"; no
- window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
-}
