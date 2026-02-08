@@ -17,6 +17,9 @@ body{
   overflow-x:hidden;
 }
 
+/* Music */
+audio{display:none;}
+
 /* Canvas */
 canvas{
   position:fixed;
@@ -157,6 +160,9 @@ canvas{
 
 <body>
 
+<!-- Background Music -->
+<audio id="bgm" src="song.mp3" loop></audio>
+
 <canvas id="c"></canvas>
 
 <div id="text">Tap to Start 💖</div>
@@ -171,74 +177,49 @@ canvas{
 
 
 <!-- CARD 1 -->
-<div class="card">
-<div class="inner">
-
+<div class="card"><div class="inner">
 <div class="front">Tap 💕</div>
-
 <div class="back">
 <img src="photo1.jpg">
 <div class="caption">My favorite smile 😍</div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 <!-- CARD 2 -->
-<div class="card">
-<div class="inner">
-
+<div class="card"><div class="inner">
 <div class="front">Tap 💖</div>
-
 <div class="back">
 <img src="photo2.jpg">
 <div class="caption">You make my world bright ✨</div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 <!-- CARD 3 -->
-<div class="card">
-<div class="inner">
-
+<div class="card"><div class="inner">
 <div class="front">Tap ❤️</div>
-
 <div class="back">
 <img src="photo3.jpg">
 <div class="caption">Every moment with you is magic 💫</div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 <!-- CARD 4 -->
-<div class="card">
-<div class="inner">
-
+<div class="card"><div class="inner">
 <div class="front">Tap 😘</div>
-
 <div class="back">
 <img src="photo4.jpg">
 <div class="caption">My happiness begins with you 💕</div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 <!-- CARD 5 -->
-<div class="card">
-<div class="inner">
-
+<div class="card"><div class="inner">
 <div class="front">Tap 💍</div>
-
 <div class="back">
 <img src="photo5.jpg">
 <div class="caption">Forever starts with us ❤️</div>
 </div>
-
-</div>
-</div>
+</div></div>
 
 </div>
 
@@ -403,12 +384,21 @@ yes.onclick=()=>{
 
   popup.innerHTML="<h2>Yaaayyy 😍❤️</h2><p>I Love You Forever 💖</p>";
 
-  setInterval(()=>{
+  const music=document.getElementById("bgm");
+  music.play();
+
+  const blast=setInterval(()=>{
     boom(Math.random()*innerWidth,Math.random()*innerHeight);
     heart();
   },200);
 
+  setTimeout(()=>{
+    clearInterval(blast);
+    popup.style.display="none";
+  },20000);
+
 };
+
 
 no.onclick=()=>{
 
