@@ -37,8 +37,8 @@ canvas{
 
 /* Text */
 #text{
-  margin-top:120px;
-  font-size:32px;
+  margin-top:100px;
+  font-size:30px;
   text-shadow:0 0 15px gold;
 }
 
@@ -50,17 +50,17 @@ canvas{
 /* Photos */
 #photos{
   display:none;
-  margin-top:50px;
+  margin-top:40px;
   padding-bottom:60px;
 }
 
 /* Flip Cards */
 
 .card{
-  width:280px;
-  height:380px;
+  width:260px;
+  height:360px;
   perspective:1000px;
-  margin:25px auto;
+  margin:22px auto;
 }
 
 .inner{
@@ -68,7 +68,7 @@ canvas{
   height:100%;
   position:relative;
   transform-style:preserve-3d;
-  transition:0.8s;
+  transition:0.7s;
 }
 
 .card.flip .inner{
@@ -105,19 +105,18 @@ canvas{
   object-fit:cover;
 }
 
-
-/* Floating Hearts */
+/* Hearts */
 .heart{
   position:fixed;
   color:pink;
-  font-size:20px;
-  animation:float 4s linear forwards;
+  font-size:22px;
+  animation:float 3s linear forwards;
   z-index:3;
 }
 
 @keyframes float{
-  0%{transform:translateY(0);opacity:1;}
-  100%{transform:translateY(-600px);opacity:0;}
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-500px);opacity:0;}
 }
 
 /* Popup */
@@ -168,42 +167,30 @@ canvas{
 
 <h2>I Love You Rasuu ❤️</h2>
 
-<!-- Flip Photos -->
+<div class="card"><div class="inner">
+<div class="front">Tap 💕</div>
+<div class="back"><img src="photo1.jpg"></div>
+</div></div>
 
-<div class="card">
-  <div class="inner">
-    <div class="front">Tap To See 💕</div>
-    <div class="back"><img src="photo1.jpg"></div>
-  </div>
-</div>
+<div class="card"><div class="inner">
+<div class="front">Tap 💕</div>
+<div class="back"><img src="photo2.jpg"></div>
+</div></div>
 
-<div class="card">
-  <div class="inner">
-    <div class="front">Tap To See 💕</div>
-    <div class="back"><img src="photo2.jpg"></div>
-  </div>
-</div>
+<div class="card"><div class="inner">
+<div class="front">Tap 💕</div>
+<div class="back"><img src="photo3.jpg"></div>
+</div></div>
 
-<div class="card">
-  <div class="inner">
-    <div class="front">Tap To See 💕</div>
-    <div class="back"><img src="photo3.jpg"></div>
-  </div>
-</div>
+<div class="card"><div class="inner">
+<div class="front">Tap 💕</div>
+<div class="back"><img src="photo4.jpg"></div>
+</div></div>
 
-<div class="card">
-  <div class="inner">
-    <div class="front">Tap To See 💕</div>
-    <div class="back"><img src="photo4.jpg"></div>
-  </div>
-</div>
-
-<div class="card">
-  <div class="inner">
-    <div class="front">Tap To See 💕</div>
-    <div class="back"><img src="photo5.jpg"></div>
-  </div>
-</div>
+<div class="card"><div class="inner">
+<div class="front">Tap 💕</div>
+<div class="back"><img src="photo5.jpg"></div>
+</div></div>
 
 <h3>You Complete Me 💕</h3>
 
@@ -223,8 +210,8 @@ canvas{
 
 /* Canvas */
 
-const canvas = document.getElementById("c");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
 
 function resize(){
   canvas.width=innerWidth;
@@ -240,20 +227,20 @@ let fireworks=[];
 function Fire(x,y){
   this.x=x;
   this.y=y;
-  this.dx=(Math.random()-0.5)*4;
-  this.dy=(Math.random()-0.5)*4;
-  this.life=40;
+  this.dx=(Math.random()-0.5)*5;
+  this.dy=(Math.random()-0.5)*5;
+  this.life=45;
 }
 
-function boom(x,y){
-  for(let i=0;i<25;i++){
+function boom(x,y,count=20){
+  for(let i=0;i<count;i++){
     fireworks.push(new Fire(x,y));
   }
 }
 
 function draw(){
 
-  ctx.fillStyle="rgba(0,0,0,0.35)";
+  ctx.fillStyle="rgba(0,0,0,0.4)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   fireworks.forEach((f,i)=>{
@@ -267,36 +254,34 @@ function draw(){
     f.y+=f.dy;
     f.life--;
 
-    if(f.life<0){
-      fireworks.splice(i,1);
-    }
+    if(f.life<0) fireworks.splice(i,1);
 
   });
 
   requestAnimationFrame(draw);
 }
-
 draw();
 
 /* Hearts */
 
 function createHeart(){
 
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💖";
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
 
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.bottom="0px";
+  h.style.left=Math.random()*100+"vw";
+  h.style.bottom="0";
 
-  document.body.appendChild(heart);
+  document.body.appendChild(h);
 
-  setTimeout(()=>heart.remove(),4000);
+  setTimeout(()=>h.remove(),3000);
 }
 
 /* Main Logic */
 
 let taps=0;
+let photosOpened=false;
 
 document.body.addEventListener("touchstart",(e)=>{
 
@@ -307,14 +292,20 @@ document.body.addEventListener("touchstart",(e)=>{
 
   taps++;
 
+  /* FAST TEXT FLOW */
+
   if(taps==1) text.innerText="I Love You 💛";
-  if(taps==4) text.innerText="Forever With You 💕";
-  if(taps==7) text.innerText="Only You Rasuu ❤️";
-  if(taps==10) text.innerText="My Everything 💖";
+  if(taps==2) text.innerText="Forever With You 💕";
+  if(taps==3) text.innerText="Only You ❤️";
+  if(taps==4) text.innerText="My Everything 💖";
 
-  if(taps==12){
+  /* OPEN PHOTOS QUICK */
 
-    text.innerText="You Are My World 🌍❤️";
+  if(taps==5 && !photosOpened){
+
+    photosOpened=true;
+
+    text.innerText="For You Rasuu 🌍❤️";
 
     photos.style.display="block";
 
@@ -323,11 +314,7 @@ document.body.addEventListener("touchstart",(e)=>{
         top:document.body.scrollHeight,
         behavior:"smooth"
       });
-    },500);
-
-    setTimeout(()=>{
-      popup.style.display="block";
-    },2500);
+    },400);
   }
 
 });
@@ -347,16 +334,57 @@ document.querySelectorAll(".card").forEach(card=>{
 
 });
 
-/* Popup */
+/* Show Proposal After Scroll End */
+
+window.addEventListener("scroll",()=>{
+
+  if(photosOpened){
+
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight-50){
+
+      setTimeout(()=>{
+        popup.style.display="block";
+      },800);
+
+    }
+  }
+
+});
+
+/* YES = CRAZY BLAST */
 
 yes.onclick=()=>{
-  popup.innerHTML="<h2>Yaaayyy 😍❤️</h2><p>I Love You Forever 💖</p>";
+
+  popup.innerHTML="<h2>I Love You 😍❤️</h2>";
+
+  let i=0;
+
+  const blast=setInterval(()=>{
+
+    boom(
+      Math.random()*innerWidth,
+      Math.random()*innerHeight,
+      40
+    );
+
+    createHeart();
+
+    i++;
+
+    if(i>15) clearInterval(blast);
+
+  },150);
+
 };
 
+/* NO Button Run 😅 */
+
 no.onclick=()=>{
+
   no.style.position="absolute";
   no.style.left=Math.random()*200+"px";
   no.style.top=Math.random()*150+"px";
+
 };
 
 </script>
