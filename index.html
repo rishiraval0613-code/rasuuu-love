@@ -2,176 +2,143 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Love ❤️</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Rasuu ❤️</title>
 
 <style>
 body{
-margin:0;
-font-family:Arial, sans-serif;
-background:linear-gradient(#ff9acb,#ffc1dd);
-text-align:center;
-color:#fff;
-overflow-x:hidden;
+  margin:0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg,#ff9acb,#ff6fae);
+  text-align:center;
+  color:white;
 }
 
 section{
-min-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:20px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
 
-h1{font-size:30px;}
-p{font-size:18px;}
-
-.btn{
-padding:12px 25px;
-border:none;
-border-radius:25px;
-font-size:18px;
-margin:10px;
-cursor:pointer;
+h1,h2{
+  text-shadow:0 0 10px pink;
 }
 
-.yes{background:#2ecc71;color:#fff;}
-.no{background:#e74c3c;color:#fff;position:relative;}
+button{
+  background:#ff2f92;
+  color:white;
+  border:none;
+  padding:15px 30px;
+  border-radius:30px;
+  font-size:18px;
+  cursor:pointer;
+  margin:10px;
+  box-shadow:0 0 15px hotpink;
+}
 
-.card{
-background:rgba(255,255,255,0.15);
-padding:25px;
-border-radius:20px;
-max-width:350px;
+button:hover{
+  transform:scale(1.1);
 }
 
 img{
-max-width:250px;
-border-radius:15px;
-margin:15px;
+  width:250px;
+  border-radius:20px;
+  box-shadow:0 0 20px pink;
+  margin:15px;
 }
 
-#music{display:none;}
+.heart{
+  position:fixed;
+  top:-20px;
+  color:red;
+  animation:fall 6s linear infinite;
+}
 
-.slider img{display:none;}
-.slider img.active{display:block;}
-
-.qr{margin-top:20px;}
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<audio id="music" autoplay loop>
-<source src="song.mp3" type="audio/mp3">
+<audio autoplay loop>
+  <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<!-- PAGE 1 -->
+<!-- Page 1 -->
 <section id="p1">
-<img src="cat1.gif" width="120">
-<h1>I have something special 💖</h1>
-<p>Tap to begin</p>
-<button class="btn yes" onclick="go(2)">Start ❤️</button>
+  <h1>💖 Hi Rasuu 💖</h1>
+  <h2>I have something special for you...</h2>
+  <button onclick="next(2)">Tap Here ❤️</button>
 </section>
 
-<!-- PAGE 2 -->
+<!-- Page 2 -->
 <section id="p2" style="display:none">
-<img src="cat2.gif" width="120">
-<h1>Do you trust me? 🥺</h1>
-
-<button class="btn yes" onclick="go(3)">Yes 💕</button>
-<button class="btn no" id="no1">No 😒</button>
+  <h2>Do you trust me? 🥺</h2>
+  <button onclick="next(3)">Yes ❤️</button>
+  <button onclick="alert('Please say Yes 😭❤️')">No 😢</button>
 </section>
 
-<!-- PAGE 3 -->
+<!-- Page 3 -->
 <section id="p3" style="display:none">
-<img src="cat3.gif" width="120">
-<h1>Do you love me? 💘</h1>
-
-<button class="btn yes" onclick="go(4)">Yes 😍</button>
-<button class="btn no" id="no2">No 😜</button>
+  <h2>Do you love me? 💕</h2>
+  <button onclick="next(4)">Yes 😍</button>
+  <button onclick="alert('Think again 😭❤️')">No 😢</button>
 </section>
 
-<!-- PAGE 4 -->
+<!-- Page 4 -->
 <section id="p4" style="display:none">
+  <h2>Our Memories 📸</h2>
 
-<h1>Our Memories 📸</h1>
+  <img src="photo1.jpg">
+  <img src="photo2.jpg">
 
-<div class="slider">
-<img src="photo1.jpg" class="active">
-<img src="photo2.jpg">
-</div>
-
-<button class="btn yes" onclick="next()">➡️ Next</button>
-<button class="btn yes" onclick="go(5)">Continue 💖</button>
-
+  <br>
+  <button onclick="next(5)">Next 💝</button>
 </section>
 
-<!-- PAGE 5 -->
+<!-- Page 5 -->
 <section id="p5" style="display:none">
+  <h1>💍 Will You Be Mine Forever? 💍</h1>
 
-<div class="card">
+  <p style="font-size:20px">
+    From the first day I met you,<br>
+    My life became brighter ✨<br><br>
 
-<img src="cat4.gif" width="120">
+    You are my smile, my peace, my world ❤️
+  </p>
 
-<h2>My Dearest Love 💌</h2>
-
-<p>
-From the day I met you, my life changed forever.<br><br>
-You are my smile, my happiness, my everything ❤️<br><br>
-Will you be mine forever? 🥺💍
-</p>
-
-<button class="btn yes" onclick="go(6)">Yes Forever 💍</button>
-
-</div>
-
-</section>
-
-<!-- FINAL -->
-<section id="p6" style="display:none">
-
-<h1>I Love You Forever 💞</h1>
-
-<img src="cat5.gif" width="150">
-
-<p>You are mine forever ❤️</p>
-
-<div class="qr">
-<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&https://github.com/rishiraval0613-code/rasuuu-love/edit/main/index.html">
-<p>Scan Me 📱</p>
-</div>
-
+  <button onclick="yes()">YES FOREVER 💖</button>
 </section>
 
 
 <script>
 
-function go(n){
-document.querySelectorAll("section").forEach(s=>s.style.display="none");
-document.getElementById("p"+n).style.display="flex";
-
-document.getElementById("music").play();
+function next(n){
+  document.querySelectorAll("section").forEach(s=>s.style.display="none");
+  document.getElementById("p"+n).style.display="flex";
 }
 
-/* NO Button Dance */
-function move(btn){
-btn.style.left=Math.random()*200-100+"px";
-btn.style.top=Math.random()*200-100+"px";
+function yes(){
+  alert("I LOVE YOU SO MUCH RASUU 💕💍");
 }
 
-document.getElementById("no1").onclick=function(){move(this)};
-document.getElementById("no2").onclick=function(){move(this)};
+// Falling Hearts
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"%";
+  h.style.fontSize=(20+Math.random()*20)+"px";
+  document.body.appendChild(h);
 
-/* Slider */
-let i=0;
-function next(){
-let imgs=document.querySelectorAll(".slider img");
-imgs[i].classList.remove("active");
-i=(i+1)%imgs.length;
-imgs[i].classList.add("active");
-}
+  setTimeout(()=>h.remove(),6000);
+},300);
 
 </script>
 
