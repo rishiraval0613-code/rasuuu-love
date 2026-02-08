@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For My Rasuu ❤️</title>
+<title>For Rasuu ❤️</title>
 
 <style>
 
-html,body{
+body,html{
   margin:0;
   padding:0;
   background:black;
-  color:gold;
   font-family:cursive;
   text-align:center;
+  color:gold;
   overflow-x:hidden;
 }
 
-/* Fireworks Canvas */
+/* Canvas */
 canvas{
   position:fixed;
   top:0;
@@ -29,45 +29,87 @@ canvas{
   z-index:0;
 }
 
-/* Text Layer */
-#text,#hint,#photos{
+/* Main Text */
+#text{
+  margin:80px 0 20px;
+  font-size:30px;
+  text-shadow:0 0 15px gold;
   position:relative;
   z-index:5;
 }
 
-/* Main Text */
-#text{
-  margin-top:120px;
-  font-size:32px;
-  text-shadow:0 0 15px gold;
+/* Gallery */
+.gallery{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:30px;
+  padding-bottom:80px;
+  position:relative;
+  z-index:5;
 }
 
-/* Hint */
-#hint{
-  font-size:14px;
-  color:white;
-  margin-top:5px;
+/* Flip Card */
+.card{
+  width:280px;
+  height:380px;
+  perspective:1000px;
 }
 
-/* Photos Section */
-#photos{
-  display:none;
-  margin-top:50px;
-  padding-bottom:60px;
+.inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:0.8s;
 }
 
-/* Images */
-img{
-  width:90%;
-  max-width:350px;
+.card.flip .inner{
+  transform:rotateY(180deg);
+}
+
+.front,.back{
+  position:absolute;
+  width:100%;
+  height:100%;
   border-radius:20px;
-  margin:15px auto;
-  display:block;
-  box-shadow:0 0 15px gold;
+  backface-visibility:hidden;
+  overflow:hidden;
+  box-shadow:0 0 20px gold;
 }
 
-h2,h3{
-  margin:15px;
+/* Front */
+.front{
+  background:#111;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
+}
+
+/* Back */
+.back{
+  transform:rotateY(180deg);
+}
+
+.back img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  font-size:22px;
+  animation:float 4s linear forwards;
+  color:pink;
+  z-index:2;
+}
+
+@keyframes float{
+  from{transform:translateY(0);opacity:1;}
+  to{transform:translateY(-600px);opacity:0;}
 }
 
 </style>
@@ -77,65 +119,86 @@ h2,h3{
 
 <canvas id="c"></canvas>
 
-<div id="text">Tap to start 💖</div>
-<div id="hint">Tap for magic ✨</div>
+<div id="text">Tap Photos 💖</div>
 
-<div id="photos">
+<div class="gallery">
 
-<h2>I Love You Rasuu ❤️</h2>
+  <div class="card">
+    <div class="inner">
+      <div class="front">Tap To See 💕</div>
+      <div class="back"><img src="photo1.jpg"></div>
+    </div>
+  </div>
 
-<img src="photo1.jpg">
-<img src="photo2.jpg">
-<img src="photo3.jpg">
-<img src="photo4.jpg">
-<img src="photo5.jpg">
+  <div class="card">
+    <div class="inner">
+      <div class="front">Tap To See 💕</div>
+      <div class="back"><img src="photo2.jpg"></div>
+    </div>
+  </div>
 
-<h3>Will you be mine forever? 💍</h3>
+  <div class="card">
+    <div class="inner">
+      <div class="front">Tap To See 💕</div>
+      <div class="back"><img src="photo3.jpg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="inner">
+      <div class="front">Tap To See 💕</div>
+      <div class="back"><img src="photo4.jpg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="inner">
+      <div class="front">Tap To See 💕</div>
+      <div class="back"><img src="photo5.jpg"></div>
+    </div>
+  </div>
 
 </div>
 
 <script>
 
-/* Canvas Setup */
+/* Canvas */
 
-const canvas = document.getElementById("c");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("c");
+const ctx=canvas.getContext("2d");
 
-canvas.width = innerWidth;
-canvas.height = innerHeight;
-
-window.addEventListener("resize",()=>{
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-});
-
-/* Fireworks */
+function resize(){
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
 
 let fireworks=[];
 
 function Fire(x,y){
   this.x=x;
   this.y=y;
-  this.dx=(Math.random()-0.5)*6;
-  this.dy=(Math.random()-0.5)*6;
-  this.life=60;
+  this.dx=(Math.random()-0.5)*4;
+  this.dy=(Math.random()-0.5)*4;
+  this.life=40;
 }
 
 function boom(x,y){
-  for(let i=0;i<60;i++){
+  for(let i=0;i<20;i++){
     fireworks.push(new Fire(x,y));
   }
 }
 
 function draw(){
 
-  ctx.fillStyle="rgba(0,0,0,0.2)";
+  ctx.fillStyle="rgba(0,0,0,0.3)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   fireworks.forEach((f,i)=>{
 
-    ctx.beginPath();
     ctx.fillStyle="gold";
+    ctx.beginPath();
     ctx.arc(f.x,f.y,2,0,Math.PI*2);
     ctx.fill();
 
@@ -154,45 +217,33 @@ function draw(){
 
 draw();
 
-/* Tap Logic */
+/* Hearts */
 
-let taps=0;
+function heart(){
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💖";
 
-document.body.addEventListener("click",(e)=>{
+  h.style.left=Math.random()*100+"vw";
+  h.style.bottom="0";
 
-  boom(e.clientX,e.clientY);
-  taps++;
+  document.body.appendChild(h);
 
-  if(taps==1){
-    document.getElementById("text").innerText="I Love You 💛";
-  }
+  setTimeout(()=>h.remove(),4000);
+}
 
-  if(taps==3){
-    document.getElementById("text").innerText="My Heart Is Yours ❤️";
-  }
+/* Flip Logic */
 
-  if(taps==6){
-    document.getElementById("text").innerText="Forever With You 💖";
-  }
+document.querySelectorAll(".card").forEach(card=>{
 
-  if(taps==9){
-    document.getElementById("text").innerText="Rasuu 💕";
-  }
+  card.addEventListener("click",(e)=>{
 
-  if(taps==12){
+    card.classList.toggle("flip");
 
-    document.getElementById("text").innerText="Will You Be Mine? 💍";
+    boom(e.clientX,e.clientY);
+    heart();
 
-    document.getElementById("photos").style.display="block";
-
-    setTimeout(()=>{
-      window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
-      });
-    },500);
-
-  }
+  });
 
 });
 
