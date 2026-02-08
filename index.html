@@ -12,7 +12,7 @@ background:black;
 color:gold;
 font-family:cursive;
 text-align:center;
-overflow:hidden;
+overflow-y:auto;
 }
 
 canvas{
@@ -137,3 +137,7 @@ document.getElementById("photos").style.display="block";
 
 </body>
 </html>
+if(taps==12){
+ document.getElementById("photos").style.display="block"; no
+ window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
